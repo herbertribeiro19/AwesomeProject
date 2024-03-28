@@ -16,7 +16,9 @@ export default function Moviments({ data }) {
 const styles = StyleSheet.create({
     container: {
         color: "#fff",
-        backgroundColor: "#111",
+        // backgroundColor: "#111",
+        borderBottomColor: "#444",
+        borderBottomWidth: 0.5,
         padding: 24,
         borderRadius: 20,
         marginBottom: 14,
