@@ -12,6 +12,9 @@ export default function Balance({ saldo, gastos }) {
                     <Text style={styles.balance}>{saldo}</Text>
                 </View>
             </View>
+            <View>
+                <Text style={styles.divisor}>|</Text>
+            </View>
             <View style={styles.item}>
                 <Text style={styles.itemTitle}>Gastos</Text>
                 <View style={styles.content}>
@@ -26,7 +29,7 @@ export default function Balance({ saldo, gastos }) {
 
 const styles = StyleSheet.create({
     container: {
-        
+
         backgroundColor: '#111',
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -42,8 +45,12 @@ const styles = StyleSheet.create({
         zIndex: 99,
     },
 
-    item: {
-
+    divisor: {
+        color: "#222",
+        fontSize: 40,
+        alignContent: "center",
+        alignItems: "center",
+        justifyContent: "center",
     },
 
     content: {

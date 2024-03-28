@@ -33,7 +33,7 @@ export default function Home() {
         <View style={styles.container}>
             <Header name="Herbert Ribeiro"></Header>
             <Balance saldo="9.200,00" gastos="-520,00"></Balance>
-            <Text style={styles.title}>Últimas movimentações </Text>
+            <Text style={styles.title}>Últimas movimentações</Text>
             <FlatList
                 style={styles.list}
                 data={list}
@@ -57,9 +57,8 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         color: "#fff",
-        marginLeft: 14,
-        marginRight: 14,
-        marginTop: 14,
+        marginLeft: 20,
+        marginTop: 16,
     },
 
     list: {

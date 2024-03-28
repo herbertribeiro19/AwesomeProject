@@ -20,21 +20,36 @@ const styles = StyleSheet.create({
         padding: 24,
         borderRadius: 20,
         marginBottom: 14,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignContent: "center",
+        alignItems: "center",
     },
 
     textStilo: {
         color: "#fff",
+        fontSize: 14,
+        paddingStart: 4,
     },
 
     content: {
         color: "#fff",
+        flexDirection: "column",
+        alignContent: "right",
+        alignItems: "right",
+        justifyContent: "right",
+        paddingEnd: 4,
     },
 
     label: {
-        color: "#fff",
+        color: "#f1f1f1",
+        fontSize: 14,
+        fontWeight: "bold",
+
     },
 
     valor: {
         color: "#fff",
+        fontSize: 16,
     },
 })
