@@ -13,7 +13,6 @@ export default function Moviments({ data }) {
 }
 
 
-
 const styles = StyleSheet.create({
     container: {
         color: "#fff",
