@@ -1,12 +1,27 @@
+import React, { useState } from 'react';
+
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Feather } from '@expo/vector-icons'
 
 export default function Moviments({ data }) {
+    const [showValue, setShowValue] = useState(false);
+
     return (
-        <TouchableOpacity style={styles.container}>
-            <Text style={styles.textStilo}>{data.data}</Text>
+        <TouchableOpacity style={styles.container} onPress={() => setShowValue(!showValue)}>
+            <Text style={styles.data}>{data.data}</Text>
             <View style={styles.content}>
                 <Text style={styles.label}>{data.label}</Text>
-                <Text style={styles.valor}>{data.value}</Text>
+                {showValue ? (
+                    <Text
+                        style={data.type === 1 ? styles.valor : styles.expenses}
+                    >
+                        {data.type === 1 ? `R$ ${data.value}` : `R$ -${data.value}`}
+                    </Text>
+                ) : (
+                    <View style={styles.visualizacao}>
+                        <Feather style={styles.icon} name="eye" size={12} color="#f1f1f1"></Feather>
+                    </View>
+                )}
             </View>
         </TouchableOpacity>
     );
@@ -16,42 +31,56 @@ export default function Moviments({ data }) {
 const styles = StyleSheet.create({
     container: {
         color: "#fff",
-        // backgroundColor: "#111",
+        backgroundColor: "#111",
+        borderRadius: 8,
+        margin: 6,
+        flex: 1,
         borderBottomColor: "#444",
-        borderBottomWidth: 0.5,
         padding: 24,
-        borderRadius: 20,
-        marginBottom: 14,
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignContent: "center",
-        alignItems: "center",
     },
 
-    textStilo: {
+    data: {
         color: "#fff",
         fontSize: 14,
-        paddingStart: 4,
     },
 
     content: {
         color: "#fff",
-        flexDirection: "column",
-        alignContent: "right",
-        alignItems: "right",
-        justifyContent: "right",
-        paddingEnd: 4,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        marginTop: 2,
     },
 
     label: {
         color: "#f1f1f1",
         fontSize: 14,
-        fontWeight: "bold",
-
+        marginTop: 0,
     },
 
     valor: {
-        color: "#fff",
+        color: '#66ffd2',
         fontSize: 16,
+        fontWeight: "bold",
     },
+
+    expenses: {
+        color: '#e74c3c',
+        fontSize: 16,
+        fontWeight: "bold",
+    },
+
+    visualizacao: {
+        alignItems: 'flex-end',
+        width: 50,
+        backgroundColor: "#303030",
+        borderRadius: 20,
+        padding: 4,
+        flexDirection: "column",
+        alignContent: "right",
+        justifyContent: "right",
+    },
+
+    icon: {
+        marginRight: 4,
+    }
 })
