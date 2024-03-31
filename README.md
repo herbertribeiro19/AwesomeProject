@@ -9,4 +9,6 @@
 >
 
 #### Imagens do projeto (Ainda em desenvolvimento)
-![Simulator Screenshot - iPhone 15 Pro - 2024-03-28 at 16 49 37](https://github.com/herbertribeiro19/AwesomeProject/assets/84207944/cfce3dbf-c702-40fe-a19f-6bfd2cd92e1e)
+<img width="667" alt="Captura de Tela 2024-03-31 às 20 55 13" src="https://github.com/herbertribeiro19/AwesomeProject/assets/84207944/2362af74-bd36-4b91-8636-bef81c9623ba">
+<img width="659" alt="Captura de Tela 2024-03-31 às 20 56 28" src="https://github.com/herbertribeiro19/AwesomeProject/assets/84207944/d0684eac-186a-4b7a-b07b-f6cbe98c7b49">
+
