@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         color: "#fff",
         fontSize: 14,
-        marginBottom: 10,
+        marginBottom: 30,
         textAlign: "center",
     },
 })
