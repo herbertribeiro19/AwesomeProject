@@ -1,28 +1,26 @@
-import React, { useState } from "react";
-import {
-  View,
-  StyleSheet,
-  Text,
-  Button,
-  TextInput,
-  TouchableOpacity,
-  Modal,
-} from "react-native";
+import React from "react";
+import { View, StyleSheet, Text } from "react-native";
 import { SelectList } from "react-native-dropdown-select-list";
 
-export default function Dropdown() {
-  const [selected, setSelected] = React.useState("");
+export default function Dropdown({ onSelected }) {
+  const handleSelect = (selectedItem) => {
+    const selectedValue = selectedItem[0]?.value; // Usamos ? para tratar o caso de selectedItem[0] ser undefined
+    onSelected(selectedItem);
+    console.log("Testando aqui..");
+    console.log(selectedItem);
+  };
 
   const data = [
     { key: "1", value: "Entrada" },
     { key: "2", value: "Saída" },
   ];
+
   return (
     <View style={styles.dropdownBox}>
       <SelectList
         style={styles.dropdown}
         placeholder="Selecione uma entrada ou saída"
-        setSelected={(val) => setSelected(val)}
+        setSelected={handleSelect}
         data={data}
         save="value"
         search={false}
@@ -40,6 +38,7 @@ export default function Dropdown() {
 
 const styles = StyleSheet.create({
   dropdownBox: {
+    marginTop: 16,
     marginBottom: 10,
   },
 });

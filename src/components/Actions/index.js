@@ -9,8 +9,9 @@ import {
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import Form from "../Form/";
+import Home from "../../pages/Home/";
 
-export default function Actions() {
+export default function Actions({ onSaveEntry }) {
   const [modalVisible, setModalVisible] = useState(false);
 
   const openModal = () => {
@@ -28,7 +29,10 @@ export default function Actions() {
         horizontal={true}
         showsHorizontalScrollIndicator={false}
       >
-        <TouchableOpacity style={styles.actionButton} onPress={openModal}>
+        <TouchableOpacity
+          style={styles.actionButton}
+          onPress={() => setModalVisible(true)}
+        >
           <View style={styles.areaButton}>
             <AntDesign name="addfolder" size={26} color="#fff"></AntDesign>
           </View>
@@ -69,17 +73,17 @@ export default function Actions() {
         animationType="slide"
         transparent={true}
         statusBarTranslucent={true}
-        onRequestClose={closeModal}
+        onRequestClose={() => setModalVisible(false)}
         style={styles.modalComplete}
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalHeader}>
-            <TouchableOpacity onPress={closeModal}>
+            <TouchableOpacity onPress={() => setModalVisible(false)}>
               <AntDesign name="close" size={20} color="#fff"></AntDesign>
             </TouchableOpacity>
             <Text style={styles.modalText}>Entrada de informação</Text>
           </View>
-          <Form />
+          <Form onSave={onSaveEntry} />
         </View>
       </Modal>
     </View>

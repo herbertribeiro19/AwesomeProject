@@ -12,10 +12,16 @@ import React, { useState } from "react";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { AntDesign } from "@expo/vector-icons";
 
-export default function Calendario() {
+export default function Calendario({ onSelectedDate }) {
   const [date, setDate] = useState(new Date());
   const [showPicker, setShowPicker] = useState(true);
   const [dateInfo, setDateInfo] = useState("");
+
+  const handleSelectDate = (selectedDate) => {
+    onSelectedDate(dateInfo);
+    console.log("Testando datinha aqui..");
+    console.log(dateInfo);
+  };
 
   const [open, setOpen] = useState(false); //open and close the modal
   function handleOnPress() {
@@ -31,10 +37,10 @@ export default function Calendario() {
     if (type == "set") {
       const currentDate = selectedDate;
       setDate(currentDate);
-
       if (Platform.OS === "android") {
         toggleDatepicker();
         setDateInfo(formatDate(currentDate));
+        handleSelectDate(selectedDate);
       }
     } else {
       toggleDatepicker();
@@ -44,7 +50,7 @@ export default function Calendario() {
   const confirmIOSDate = () => {
     setDateInfo(formatDate(date));
     toggleDatepicker();
-    handleOnPress();
+    handleSelectDate(date);
   };
 
   const formatDate = (rawDate) => {
