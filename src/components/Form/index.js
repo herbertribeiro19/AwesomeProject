@@ -23,7 +23,7 @@ export default function Form({ onSave }) {
   const [modalVisible, setModalVisible] = useState(false);
 
   const handleSave = () => {
-    if (tipo && valor && descricao != null) {
+    if (tipo && valor && descricao && data != null) {
       const newEntry = {
         id: Date.now().toString(), // Convertido para string para garantir que seja uma chave única
         label: descricao,
@@ -43,7 +43,7 @@ export default function Form({ onSave }) {
       setData("");
       setModalVisible(false);
     } else {
-      console.log("Por favor, preencha todos os campos.");
+      alert("Por favor, preencha todos os campos.");
       console.log(tipo);
       console.log(valor);
       console.log(descricao);
@@ -60,7 +60,7 @@ export default function Form({ onSave }) {
         <Text style={styles.textValor}>Valor</Text>
         <TextInput
           style={styles.inputValor}
-          placeholder="1.000"
+          placeholder="1000"
           keyboardType="decimal-pad"
           value={valor}
           onChangeText={setValor}

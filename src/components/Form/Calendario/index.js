@@ -40,7 +40,7 @@ export default function Calendario({ onSelectedDate }) {
       if (Platform.OS === "android") {
         toggleDatepicker();
         setDateInfo(formatDate(currentDate));
-        handleSelectDate(selectedDate);
+        handleSelectDate();
       }
     } else {
       toggleDatepicker();
@@ -50,7 +50,7 @@ export default function Calendario({ onSelectedDate }) {
   const confirmIOSDate = () => {
     setDateInfo(formatDate(date));
     toggleDatepicker();
-    handleSelectDate(date);
+    handleSelectDate();
   };
 
   const formatDate = (rawDate) => {
@@ -108,7 +108,7 @@ export default function Calendario({ onSelectedDate }) {
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={confirmIOSDate}>
-                      <Text style={[styles.buttonText, { color: "green" }]}>
+                      <Text style={[styles.buttonText, { color: "#fff" }]}>
                         Confirm
                       </Text>
                     </TouchableOpacity>
@@ -139,11 +139,12 @@ const styles = StyleSheet.create({
   },
 
   modalDatePicker: {
-    backgroundColor: "white",
+    backgroundColor: "#495757",
     top: 300,
     padding: 30,
     margin: 30,
     borderRadius: 30,
+    color: "#333",
   },
 
   container: {
