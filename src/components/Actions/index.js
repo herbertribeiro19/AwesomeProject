@@ -9,10 +9,10 @@ import {
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import Form from "../Form/";
-import Home from "../../pages/Home/";
 
 export default function Actions({ onSaveEntry }) {
   const [modalVisible, setModalVisible] = useState(false);
+  const [editItem, setEditItem] = useState(null);
 
   const openModal = () => {
     setModalVisible(true);

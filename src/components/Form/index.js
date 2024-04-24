@@ -3,17 +3,12 @@ import {
   View,
   StyleSheet,
   Text,
-  Button,
   TextInput,
   TouchableOpacity,
-  Modal,
 } from "react-native";
 import Calendario from "./Calendario/";
 import Dropdown from "./Dropdown";
-import Home from "../../pages/Home";
-import Actions from "../../components/Actions";
 import { AntDesign } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
 
 export default function Form({ onSave }) {
   const [tipo, setTipo] = useState("");
@@ -24,29 +19,24 @@ export default function Form({ onSave }) {
 
   const handleSave = () => {
     if (tipo && valor && descricao && data != null) {
+      const valorCorrigido = valor.replace(",", ".");
+
       const newEntry = {
         id: Date.now().toString(), // Convertido para string para garantir que seja uma chave única
         label: descricao,
-        value: parseFloat(valor),
+        value: parseFloat(valorCorrigido), // Convertendo para número
         data: data,
         type: tipo === "Entrada" ? 1 : 0, // Converte o tipo para um número (1 para entrada, 0 para saída)
       };
+      alert(valorCorrigido);
       onSave(newEntry);
-      console.log("ENTREI VADIA");
-      console.log(tipo);
-      console.log(valor);
-      console.log(descricao);
-      console.log(data);
       setTipo("");
       setValor("");
       setDescricao("");
       setData("");
-      setModalVisible(false);
+      setModalVisible(true);
     } else {
       alert("Por favor, preencha todos os campos.");
-      console.log(tipo);
-      console.log(valor);
-      console.log(descricao);
     }
   };
 
@@ -61,9 +51,13 @@ export default function Form({ onSave }) {
         <TextInput
           style={styles.inputValor}
           placeholder="1000"
-          keyboardType="decimal-pad"
+          keyboardType="ascii-capable"
           value={valor}
-          onChangeText={setValor}
+          onChangeText={(text) => {
+            // Remove caracteres inválidos exceto dígitos e ponto
+            const formattedText = text.replace(/[^\d.]/g, "");
+            setValor(formattedText);
+          }}
         ></TextInput>
       </View>
 

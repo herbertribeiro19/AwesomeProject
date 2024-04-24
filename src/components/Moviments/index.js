@@ -1,7 +1,12 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
-export default function Moviments({ data }) {
+export default function Moviments({ data, onDelete }) {
+  const formatValue = (value) => {
+    // Formatando o valor para exibir duas casas decimais
+    return parseFloat(value).toFixed(2).replace(".", ",");
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.data}>{data.data}</Text>
@@ -10,6 +15,11 @@ export default function Moviments({ data }) {
         <Text style={data.type === 1 ? styles.valor : styles.expenses}>
           {data.type === 1 ? `R$ ${data.value}` : `-R$ ${data.value}`}
         </Text>
+      </View>
+      <View style={styles.buttonsContainer}>
+        <TouchableOpacity onPress={() => onDelete(data.id)}>
+          <Ionicons name="trash" size={32} color="white" />
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -45,6 +55,16 @@ const styles = StyleSheet.create({
   },
   expenses: {
     color: "#e74c3c",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  buttonsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 10,
+  },
+  buttonText: {
+    color: "#3498db",
     fontSize: 16,
     fontWeight: "bold",
   },
