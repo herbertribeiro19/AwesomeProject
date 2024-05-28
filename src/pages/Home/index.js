@@ -5,6 +5,7 @@ import Header from "../../components/Header";
 import Balance from "../../components/Balance";
 import Moviments from "../../components/Moviments";
 import Actions from "../../components/Actions";
+import Card from "../../components/Card";
 
 export default function Home() {
   const [list, setList] = useState([]);
@@ -63,6 +64,7 @@ export default function Home() {
       <Balance saldo="2.000,00" gastos="-1.500,00" />
 
       <Actions onSaveEntry={handleSaveEntry} />
+      <Card />
 
       <Text style={styles.title}>Últimas movimentações</Text>
       <FlatList
