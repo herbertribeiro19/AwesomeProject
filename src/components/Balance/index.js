@@ -2,13 +2,17 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 export default function Balance({ saldo, gastos }) {
+  const formatCurrency = (value) => {
+    return parseFloat(value).toFixed(2).replace(".", ",");
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.item}>
         <Text style={styles.itemTitle}>Saldo</Text>
         <View style={styles.content}>
           <Text style={styles.currencySymbol}>R$</Text>
-          <Text style={styles.balance}>{saldo}</Text>
+          <Text style={styles.balance}>{formatCurrency(saldo)}</Text>
         </View>
       </View>
       <View>
@@ -18,7 +22,7 @@ export default function Balance({ saldo, gastos }) {
         <Text style={styles.itemTitle}>Gastos</Text>
         <View style={styles.content}>
           <Text style={styles.currencySymbol}>R$</Text>
-          <Text style={styles.expenses}>{gastos}</Text>
+          <Text style={styles.expenses}>{formatCurrency(gastos)}</Text>
         </View>
       </View>
     </View>
@@ -35,7 +39,6 @@ const styles = StyleSheet.create({
     marginTop: -24,
     marginStart: 16,
     marginEnd: 16,
-    // marginBottom: 600,
     borderRadius: 20,
     paddingTop: 22,
     paddingBottom: 22,

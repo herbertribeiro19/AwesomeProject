@@ -34,9 +34,9 @@ export default function Actions({ onSaveEntry }) {
           onPress={() => setModalVisible(true)}
         >
           <View style={styles.areaButton}>
-            <AntDesign name="addfolder" size={26} color="#fff"></AntDesign>
+            <AntDesign name="plus" size={26} color="#fff"></AntDesign>
           </View>
-          <Text style={styles.labelButton}>Entradas</Text>
+          <Text style={styles.labelButton}>Registros</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.actionButton}>

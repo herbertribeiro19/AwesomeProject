@@ -45,10 +45,10 @@ const styles = StyleSheet.create({
     marginLeft: 30,
   },
   imageChip: {
-    width: 40,
-    height: 40,
+    width: 46,
+    height: 36,
     marginBottom: 30,
-    marginTop: 14,
+    marginTop: 18,
     marginRight: 30,
     borderRadius: 6,
   },

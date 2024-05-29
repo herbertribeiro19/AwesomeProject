@@ -9,11 +9,18 @@ import Card from "../../components/Card";
 
 export default function Home() {
   const [list, setList] = useState([]);
+  const [saldo, setSaldo] = useState(0);
+  const [gastos, setGastos] = useState(0);
 
   useEffect(() => {
     // Carregar dados salvos ao iniciar o componente
     loadList();
   }, []);
+
+  useEffect(() => {
+    // Atualizar saldo e gastos sempre que a lista mudar
+    calculateBalance();
+  }, [list]);
 
   // Função para carregar a lista de movimentações salvas
   const loadList = async () => {
@@ -58,10 +65,27 @@ export default function Home() {
     saveList(updatedList); // Salvar a lista atualizada
   };
 
+  const calculateBalance = () => {
+    let totalSaldo = 0;
+    let totalGastos = 0;
+
+    list.forEach((item) => {
+      if (item.type === 1) {
+        totalSaldo += item.value;
+      } else {
+        totalGastos += item.value;
+        totalSaldo -= item.value;
+      }
+    });
+
+    setSaldo(totalSaldo.toFixed(2).replace(".", ","));
+    setGastos(totalGastos.toFixed(2).replace(".", ","));
+  };
+
   return (
     <View style={styles.container}>
       <Header name="Herbert Ribeiro" />
-      <Balance saldo="2.000,00" gastos="-1.500,00" />
+      <Balance saldo={saldo} gastos={gastos} />
 
       <Actions onSaveEntry={handleSaveEntry} />
       <Card />

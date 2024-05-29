@@ -7,13 +7,16 @@ export default function Moviments({ data, onDelete }) {
     // Formatando o valor para exibir duas casas decimais
     return parseFloat(value).toFixed(2).replace(".", ",");
   };
+
   return (
     <View style={styles.container}>
       <Text style={styles.data}>{data.data}</Text>
       <View style={styles.content}>
         <Text style={styles.label}>{data.label}</Text>
         <Text style={data.type === 1 ? styles.valor : styles.expenses}>
-          {data.type === 1 ? `R$ ${data.value}` : `-R$ ${data.value}`}
+          {data.type === 1
+            ? `R$ ${formatValue(data.value)}`
+            : `-R$ ${formatValue(data.value)}`}
         </Text>
       </View>
       <View style={styles.buttonsContainer}>
