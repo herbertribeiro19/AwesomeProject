@@ -88,7 +88,7 @@ export default function Home() {
       <Balance saldo={saldo} gastos={gastos} />
 
       <Actions onSaveEntry={handleSaveEntry} />
-      <Card />
+      <Card name="Herbert R Sampaio" />
 
       <Text style={styles.title}>Últimas movimentações</Text>
       <FlatList

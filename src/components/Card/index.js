@@ -2,7 +2,7 @@ import { View, StyleSheet, Text, Image, TouchableOpacity } from "react-native";
 // import LinearGradient from "react-native-linear-gradient";
 import { LinearGradient } from "expo-linear-gradient";
 
-export default function Card() {
+export default function Card({ name }) {
   const urlImage = "../../assets/visa_logo.png";
   const imageChip = "../../assets/img_chip.png";
   return (
@@ -13,7 +13,7 @@ export default function Card() {
           style={styles.boxCard}
         >
           <View style={styles.nomeFlex}>
-            <Text style={styles.name}>Herbert R Sampaio</Text>
+            <Text style={styles.name}>{name}</Text>
             <Text style={styles.date}>07/30</Text>
             <Text style={styles.number}>4001 9898 1067 2078</Text>
           </View>
