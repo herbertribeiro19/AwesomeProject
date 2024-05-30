@@ -8,7 +8,7 @@ import {
   Modal,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import Form from "../Form/";
+import Form from "../Form";
 
 export default function Actions({ onSaveEntry }) {
   const [modalVisible, setModalVisible] = useState(false);

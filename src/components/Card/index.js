@@ -9,7 +9,7 @@ export default function Card({ name }) {
     <View>
       <TouchableOpacity>
         <LinearGradient
-          colors={["#11998e", "#53cfab", "#78ffd6"]}
+          colors={["#11998e", "#11998a", "#53cfab", "#78ffd6"]}
           style={styles.boxCard}
         >
           <View style={styles.nomeFlex}>
@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
 
   flagFlex: {
     flexDirection: "row",
-    // alignSelf: "flex",
     justifyContent: "space-between",
     marginRight: 0,
     marginLeft: 30,
@@ -55,25 +54,26 @@ const styles = StyleSheet.create({
   imageLogo: {
     width: 50,
     height: 50,
-    marginBottom: 30,
+    marginBottom: 20,
     marginTop: 10,
     marginRight: 30,
   },
+
   name: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: "600",
   },
 
   date: {
-    fontSize: 16,
-    fontWeight: "300",
+    fontSize: 18,
+    fontWeight: "400",
     marginBottom: 2,
     marginTop: 2,
   },
 
   number: {
-    fontSize: 16,
-    fontWeight: "400",
+    fontSize: 18,
+    fontWeight: "500",
     marginBottom: 2,
     marginTop: 2,
   },

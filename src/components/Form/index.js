@@ -6,7 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import Calendario from "./Calendario/";
+import Calendario from "./Calendario";
 import Dropdown from "./Dropdown";
 import { AntDesign } from "@expo/vector-icons";
 
