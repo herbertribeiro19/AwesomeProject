@@ -11,16 +11,29 @@ export default function Home() {
   const [list, setList] = useState([]);
   const [saldo, setSaldo] = useState(0);
   const [gastos, setGastos] = useState(0);
+  const [username, setUserName] = useState("");
 
   useEffect(() => {
     // Carregar dados salvos ao iniciar o componente
     loadList();
+    getUserName();
   }, []);
 
   useEffect(() => {
     // Atualizar saldo e gastos sempre que a lista mudar
     calculateBalance();
   }, [list]);
+
+  const getUserName = async () => {
+    try {
+      const name = await AsyncStorage.getItem("userName");
+      if (name) {
+        setUserName(name);
+      }
+    } catch (error) {
+      console.error("Erro ao carregar nome do usuário:", error);
+    }
+  };
 
   // Função para carregar a lista de movimentações salvas
   const loadList = async () => {
@@ -84,11 +97,11 @@ export default function Home() {
 
   return (
     <View style={styles.container}>
-      <Header name="Herbert Ribeiro" />
+      <Header name={username} />
       <Balance saldo={saldo} gastos={gastos} />
 
       <Actions onSaveEntry={handleSaveEntry} />
-      <Card name="Herbert R Sampaio" />
+      <Card name={username} />
 
       <Text style={styles.title}>Últimas movimentações</Text>
       <FlatList

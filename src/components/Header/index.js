@@ -9,7 +9,7 @@ import {
   Modal,
   Image,
 } from "react-native";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AntDesign } from "@expo/vector-icons";
 import Profile from "./Profile";
 const statusBarHeight = StatusBar.currentHeight
@@ -19,13 +19,26 @@ const statusBarHeight = StatusBar.currentHeight
 export default function Header({ name }) {
   const imgUrl = "../../assets/profile.png";
   const [modalVisible, setModalVisible] = useState(false);
+  const [username, setUserName] = useState("");
 
   const openModal = () => {
     setModalVisible(true);
+    getUserName();
   };
 
   const closeModal = () => {
     setModalVisible(false);
+  };
+
+  const getUserName = async () => {
+    try {
+      const name = await AsyncStorage.getItem("userName");
+      if (name) {
+        setUserName(name);
+      }
+    } catch (error) {
+      console.error("Erro ao carregar nome do usuário:", error);
+    }
   };
 
   return (
@@ -54,7 +67,7 @@ export default function Header({ name }) {
             <TouchableOpacity onPress={() => setModalVisible(false)}>
               <AntDesign name="close" size={20} color="#fff"></AntDesign>
             </TouchableOpacity>
-            <Profile name="Herbert Ribeiro" />
+            <Profile name={username} />
           </View>
         </View>
       </Modal>
