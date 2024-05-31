@@ -68,6 +68,7 @@ export default function Calendario({ onSelectedDate }) {
           placeholder="Selecione uma data"
           value={dateInfo}
           onChangeText={setDateInfo}
+          placeholderTextColor={"#fff"}
           editable={false}
         />
       </Pressable>

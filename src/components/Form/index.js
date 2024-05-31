@@ -6,7 +6,8 @@ import {
   TextInput,
   TouchableOpacity,
   Keyboard,
-  Alert,
+  ScrollView,
+  Pressable,
 } from "react-native";
 import Calendario from "./Calendario";
 import Dropdown from "./Dropdown";
@@ -40,7 +41,7 @@ export default function Form({ onSave }) {
   };
 
   return (
-    <View>
+    <Pressable onPress={Keyboard.dismiss}>
       <View>
         <Dropdown onSelected={setTipo} />
       </View>
@@ -51,6 +52,7 @@ export default function Form({ onSave }) {
           style={styles.inputValor}
           placeholder="Ex: 1000"
           keyboardType="ascii-capable"
+          placeholderTextColor={"#fff"}
           value={valor}
           onChangeText={(text) => {
             // Remove caracteres inválidos exceto dígitos e ponto
@@ -65,6 +67,7 @@ export default function Form({ onSave }) {
         <TextInput
           style={styles.inputDescricao}
           placeholder="Ex: Salário"
+          placeholderTextColor={"#fff"}
           keyboardType="ascii-capable"
           value={descricao}
           onChangeText={setDescricao}
@@ -90,7 +93,7 @@ export default function Form({ onSave }) {
           </View>
         </TouchableOpacity>
       </View>
-    </View>
+    </Pressable>
   );
 }
 

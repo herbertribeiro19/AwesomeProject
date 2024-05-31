@@ -122,8 +122,8 @@ const styles = StyleSheet.create({
   },
 
   modalContainer: {
-    top: 200,
-    height: "70%",
+    top: 140,
+    height: "80%",
     width: "90%",
     borderRadius: 30,
     alignContent: "center",

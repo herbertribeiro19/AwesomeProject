@@ -26,7 +26,7 @@ export default function Dropdown({ onSelected }) {
         search={false}
         boxStyles={{ backgroundColor: "#444", borderRadius: 20 }}
         inputStyles={{
-          fontSize: 14,
+          fontSize: 12,
           color: "#f1f1f1",
         }}
         dropdownStyles={{ backgroundColor: "#444", borderRadius: 20 }}

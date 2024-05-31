@@ -7,6 +7,8 @@ import {
   Image,
   TouchableOpacity,
   Alert,
+  Keyboard,
+  Pressable,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -39,7 +41,7 @@ export default function Intro({ navigation }) {
   };
 
   return (
-    <View style={styles.introScreen}>
+    <Pressable style={styles.introScreen} onPress={Keyboard.dismiss}>
       <View style={styles.containerTop}>
         <Text style={styles.textIntro}> Seja bem vindo (a) </Text>
         <Image style={styles.img} source={require(urlImg)} />
@@ -59,7 +61,7 @@ export default function Intro({ navigation }) {
           <AntDesign name="rightcircle" size={24} color="white" />
         </TouchableOpacity>
       </View>
-    </View>
+    </Pressable>
   );
 }
 
@@ -95,7 +97,7 @@ const styles = StyleSheet.create({
   box: {
     backgroundColor: "#53cfab",
     width: "90%",
-    height: "26%",
+    height: "30%",
     top: "4%",
     alignSelf: "center",
     borderRadius: 20,
@@ -132,6 +134,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     gap: 12,
+    marginBottom: 20,
   },
 
   textBtn: {
