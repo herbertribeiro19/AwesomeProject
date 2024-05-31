@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "F nance",
-    "slug": "F nance",
+    "name": "Fnance",
+    "slug": "Fnance",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -15,7 +15,7 @@
       "**/*"
     ],
     "ios": {
-      "bundleIdentifier": "com.herbertribeiro.fnance", 
+      "bundleIdentifier": "com.herbertribeiro.fnance",
       "buildNumber": "1.0.0",
       "supportsTablet": true
     },
@@ -32,6 +32,11 @@
     },
     "plugins": [
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "5dbf014d-92ed-4221-b7ea-12f16715dbca"
+      }
+    }
   }
 }
