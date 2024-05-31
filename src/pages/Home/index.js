@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import { StyleSheet, Text, View, FlatList, Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Header from "../../components/Header";
 import Balance from "../../components/Balance";
@@ -70,7 +70,11 @@ export default function Home() {
       const newList = [...list, entry];
       saveList(newList); // Salvar a lista atualizada
     }
-    alert("Dados cadastrados com sucesso!");
+    Alert.alert(
+      "Novo registro adicionado",
+      `Seu registro foi salvo com sucesso.`,
+      [{ text: "Confirmar" }]
+    );
   };
 
   const handleDeleteEntry = (id) => {

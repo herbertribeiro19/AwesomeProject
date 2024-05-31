@@ -8,49 +8,44 @@ import {
   Platform,
   Modal,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import { AntDesign } from "@expo/vector-icons";
 
 export default function Calendario({ onSelectedDate }) {
   const [date, setDate] = useState(new Date());
-  const [showPicker, setShowPicker] = useState(true);
+  const [showPicker, setShowPicker] = useState(false);
   const [dateInfo, setDateInfo] = useState("");
 
+  useEffect(() => {
+    if (dateInfo) {
+      onSelectedDate(dateInfo);
+      console.log("Data selecionada:", dateInfo);
+    }
+  }, [dateInfo]);
+
   const handleSelectDate = (selectedDate) => {
-    onSelectedDate(dateInfo);
-    console.log("Testando datinha aqui..");
-    console.log(dateInfo);
+    setDateInfo(selectedDate);
   };
 
   const [open, setOpen] = useState(false); //open and close the modal
-  function handleOnPress() {
-    setOpen(!open);
-  }
 
   const toggleDatepicker = () => {
-    setShowPicker(showPicker);
-    handleOnPress();
+    setShowPicker(!showPicker);
+    setOpen(!open);
   };
 
-  const onChange = ({ type }, selectedDate) => {
-    if (type == "set") {
-      const currentDate = selectedDate;
-      setDate(currentDate);
-      if (Platform.OS === "android") {
-        toggleDatepicker();
-        setDateInfo(formatDate(currentDate));
-        handleSelectDate();
-      }
-    } else {
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setDate(currentDate);
+    if (Platform.OS === "android") {
+      handleSelectDate(formatDate(currentDate));
       toggleDatepicker();
     }
   };
 
   const confirmIOSDate = () => {
-    setDateInfo(formatDate(date));
+    handleSelectDate(formatDate(date));
     toggleDatepicker();
-    handleSelectDate();
   };
 
   const formatDate = (rawDate) => {
@@ -65,112 +60,58 @@ export default function Calendario({ onSelectedDate }) {
 
   return (
     <View>
-      <View>
-        <Text style={styles.textData}>Selecione a Data</Text>
-        {showPicker && (
-          <Pressable onPress={toggleDatepicker}>
-            <TextInput
-              style={styles.textDateStyle}
-              placeholder="Data"
-              value={dateInfo}
-              onChangeText={setDateInfo}
-              editable={false}
-              onPressIn={toggleDatepicker}
-            ></TextInput>
-          </Pressable>
-        )}
+      <Text style={styles.textData}>Data</Text>
+      <Pressable onPress={toggleDatepicker}>
+        <TextInput
+          onPress={toggleDatepicker}
+          style={styles.textDateStyle}
+          placeholder="Selecione uma data"
+          value={dateInfo}
+          onChangeText={setDateInfo}
+          editable={false}
+        />
+      </Pressable>
 
-        <Modal animationType="slide" transparent={true} visible={open}>
-          <View>
-            <View>
-              {/* MODAL DATA PICKER */}
-              <View style={styles.modalDatePicker}>
-                {showPicker && (
-                  <DateTimePicker
-                    mode="date"
-                    display="spinner"
-                    value={date}
-                    onChange={onChange}
-                  />
-                )}
+      <Modal animationType="fade" transparent={true} visible={open}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalDatePicker}>
+            {showPicker && (
+              <DateTimePicker
+                mode="date"
+                display="spinner"
+                value={date}
+                onChange={onChange}
+              />
+            )}
 
-                {showPicker && Platform.OS === "ios" && (
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      justifyContent: "space-around",
-                    }}
-                  >
-                    <TouchableOpacity onPress={handleOnPress}>
-                      <Text style={[styles.buttonText, { color: "red" }]}>
-                        Cancel
-                      </Text>
-                    </TouchableOpacity>
+            {showPicker && Platform.OS === "ios" && (
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-around",
+                }}
+              >
+                <TouchableOpacity onPress={toggleDatepicker}>
+                  <Text style={[styles.buttonText, { color: "red" }]}>
+                    Cancelar
+                  </Text>
+                </TouchableOpacity>
 
-                    <TouchableOpacity onPress={confirmIOSDate}>
-                      <Text style={[styles.buttonText, { color: "#fff" }]}>
-                        Confirm
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-                )}
+                <TouchableOpacity onPress={confirmIOSDate}>
+                  <Text style={[styles.buttonText, { color: "#fff" }]}>
+                    Confirmar
+                  </Text>
+                </TouchableOpacity>
               </View>
-            </View>
+            )}
           </View>
-        </Modal>
-      </View>
+        </View>
+      </Modal>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  TextDate: {
-    color: "white",
-  },
-
-  modalStyle: {
-    width: "100%",
-    height: "80%",
-    top: 240,
-    borderRadius: 30,
-    alignContent: "center",
-    alignSelf: "center",
-    padding: 20,
-  },
-
-  modalDatePicker: {
-    backgroundColor: "#495757",
-    top: 300,
-    padding: 30,
-    margin: 30,
-    borderRadius: 30,
-    color: "#333",
-  },
-
-  container: {
-    flex: 1,
-    backgroundColor: "red",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  centeredView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 22,
-  },
-
-  closeView: {
-    top: -20,
-    backgroundColor: "#111",
-    borderRadius: 30,
-    width: "18%",
-    padding: 15,
-    alignItems: "center",
-    color: "white",
-  },
-
   textData: {
     marginTop: 20,
     fontSize: 16,
@@ -187,5 +128,24 @@ const styles = StyleSheet.create({
     padding: 12,
     backgroundColor: "#444",
     borderRadius: 20,
+  },
+
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+    backgroundColor: "rgba(0, 0, 0, 0.5)", // semi-transparent background
+  },
+
+  modalDatePicker: {
+    backgroundColor: "#000",
+    padding: 30,
+    borderRadius: 30,
+    color: "#333",
+  },
+
+  buttonText: {
+    fontSize: 16,
   },
 });

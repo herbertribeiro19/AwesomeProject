@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -18,6 +19,18 @@ export default function Intro({ navigation }) {
     if (name.trim() !== "") {
       try {
         await AsyncStorage.setItem("userName", name);
+        Alert.alert(
+          "Bem vindo(a) ao Fnance!",
+          `Aproveite a experiência, ${name}`,
+          [
+            {
+              text: "Cancelar",
+              onPress: () => navigation.navigate("Intro"),
+              style: "cancel",
+            },
+            { text: "Continuar", onPress: () => navigation.navigate("Home") },
+          ]
+        );
         navigation.navigate("Home");
       } catch (e) {
         console.error("Failed to save name.");
@@ -27,7 +40,10 @@ export default function Intro({ navigation }) {
 
   return (
     <View style={styles.introScreen}>
-      <Image style={styles.img} source={require(urlImg)} />
+      <View style={styles.containerTop}>
+        <Text style={styles.textIntro}> Seja bem vindo (a) </Text>
+        <Image style={styles.img} source={require(urlImg)} />
+      </View>
       <View style={styles.box}>
         <Text style={styles.title}>Informe seu nome</Text>
         <TextInput
@@ -49,31 +65,45 @@ export default function Intro({ navigation }) {
 
 const styles = StyleSheet.create({
   introScreen: {
-    backgroundColor: "#000",
+    backgroundColor: "#222",
     width: "100%",
     height: "100%",
   },
 
+  containerTop: {
+    marginTop: 50,
+    flexDirection: "column-reverse",
+    gap: 20,
+  },
+
+  textIntro: {
+    color: "#fff",
+    fontSize: 20,
+    fontWeight: "500",
+    marginTop: 10,
+    marginBottom: 40,
+    alignSelf: "center",
+  },
+
   img: {
-    width: 140,
-    height: 140,
+    width: 160,
+    height: 160,
     alignSelf: "center",
     borderRadius: 20,
-    top: "14%",
   },
 
   box: {
     backgroundColor: "#53cfab",
     width: "90%",
     height: "26%",
-    top: "26%",
+    top: "4%",
     alignSelf: "center",
     borderRadius: 20,
     padding: 12,
   },
 
   title: {
-    color: "#000",
+    color: "#222",
     fontWeight: "bold",
     fontSize: 20,
     alignSelf: "center",
@@ -106,8 +136,8 @@ const styles = StyleSheet.create({
 
   textBtn: {
     color: "#fff",
-    fontWeight: "bold",
-    fontSize: 22,
+    fontWeight: "500",
+    fontSize: 18,
     alignSelf: "center",
   },
 });

@@ -5,6 +5,8 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  Keyboard,
+  Alert,
 } from "react-native";
 import Calendario from "./Calendario";
 import Dropdown from "./Dropdown";
@@ -15,7 +17,6 @@ export default function Form({ onSave }) {
   const [valor, setValor] = useState("");
   const [descricao, setDescricao] = useState("");
   const [data, setData] = useState("");
-  const [modalVisible, setModalVisible] = useState(false);
 
   const handleSave = () => {
     if (tipo && valor && descricao && data != null) {
@@ -28,13 +29,11 @@ export default function Form({ onSave }) {
         data: data,
         type: tipo === "Entrada" ? 1 : 0, // Converte o tipo para um número (1 para entrada, 0 para saída)
       };
-      alert(valorCorrigido);
       onSave(newEntry);
       setTipo("");
       setValor("");
       setDescricao("");
       setData("");
-      setModalVisible(true);
     } else {
       alert("Por favor, preencha todos os campos.");
     }
@@ -50,7 +49,7 @@ export default function Form({ onSave }) {
         <Text style={styles.textValor}>Valor</Text>
         <TextInput
           style={styles.inputValor}
-          placeholder="1000"
+          placeholder="Ex: 1000"
           keyboardType="ascii-capable"
           value={valor}
           onChangeText={(text) => {
@@ -65,7 +64,7 @@ export default function Form({ onSave }) {
         <Text style={styles.textDescricao}>Descrição</Text>
         <TextInput
           style={styles.inputDescricao}
-          placeholder="Salário"
+          placeholder="Ex: Salário"
           keyboardType="ascii-capable"
           value={descricao}
           onChangeText={setDescricao}

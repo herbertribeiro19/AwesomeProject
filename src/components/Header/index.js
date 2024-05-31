@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -12,6 +11,7 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AntDesign } from "@expo/vector-icons";
 import Profile from "./Profile";
+
 const statusBarHeight = StatusBar.currentHeight
   ? StatusBar.currentHeight + 26
   : 64;
@@ -19,22 +19,25 @@ const statusBarHeight = StatusBar.currentHeight
 export default function Header({ name }) {
   const imgUrl = "../../assets/profile.png";
   const [modalVisible, setModalVisible] = useState(false);
-  const [username, setUserName] = useState("");
+  const [username, setUserName] = useState(name);
 
   const openModal = () => {
     setModalVisible(true);
-    getUserName();
   };
 
   const closeModal = () => {
     setModalVisible(false);
   };
 
+  useEffect(() => {
+    getUserName();
+  }, []);
+
   const getUserName = async () => {
     try {
-      const name = await AsyncStorage.getItem("userName");
-      if (name) {
-        setUserName(name);
+      const storedName = await AsyncStorage.getItem("userName");
+      if (storedName) {
+        setUserName(storedName);
       }
     } catch (error) {
       console.error("Erro ao carregar nome do usuário:", error);
@@ -44,11 +47,15 @@ export default function Header({ name }) {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <Text style={styles.username}>{name}</Text>
+        <View>
+          <Text style={styles.username1}>Olá</Text>
+          <Text style={styles.username2}>{username}</Text>
+        </View>
+
         <TouchableOpacity
           activeOpacity={0.9}
           style={styles.buttonUser}
-          onPress={() => setModalVisible(true)}
+          onPress={openModal}
         >
           <Image style={styles.imgProfile} source={require(imgUrl)} />
         </TouchableOpacity>
@@ -59,16 +66,20 @@ export default function Header({ name }) {
         animationType="fade"
         transparent={true}
         statusBarTranslucent={true}
-        onRequestClose={() => setModalVisible(false)}
-        style={styles.modalComplete}
+        onRequestClose={closeModal}
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalHeader}>
-            <TouchableOpacity onPress={() => setModalVisible(false)}>
-              <AntDesign name="close" size={20} color="#fff"></AntDesign>
-            </TouchableOpacity>
-            <Profile name={username} />
+            <View style={styles.modalHeader}>
+              <TouchableOpacity onPress={closeModal}>
+                <AntDesign name="close" size={20} color="#fff" />
+              </TouchableOpacity>
+            </View>
+            <View>
+              <Text style={styles.title}>Configurações de Perfil</Text>
+            </View>
           </View>
+          <Profile name={username} />
         </View>
       </Modal>
     </View>
@@ -94,8 +105,15 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
 
-  username: {
+  username1: {
     fontSize: 18,
+    color: "#222",
+    fontWeight: "500",
+    marginLeft: 16,
+  },
+
+  username2: {
+    fontSize: 16,
     color: "#111",
     fontWeight: "bold",
     marginLeft: 16,
@@ -125,19 +143,25 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     alignContent: "center",
     alignSelf: "center",
+    justifyContent: "center",
     padding: 20,
     backgroundColor: "#111",
   },
 
   modalHeader: {
     flexDirection: "row-reverse",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
   },
 
-  modalText: {
+  title: {
+    marginTop: 0,
+    fontSize: 16,
+    fontWeight: "400",
     color: "#fff",
-    fontSize: 12,
-    marginBottom: 20,
+  },
+
+  modalHeader: {
+    flexDirection: "row-reverse",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
   },
 });

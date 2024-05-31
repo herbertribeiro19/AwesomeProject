@@ -12,7 +12,7 @@ import Form from "../Form";
 
 export default function Actions({ onSaveEntry }) {
   const [modalVisible, setModalVisible] = useState(false);
-  const [editItem, setEditItem] = useState(null);
+  // const [editItem, setEditItem] = useState(null);
 
   const openModal = () => {
     setModalVisible(true);
@@ -81,7 +81,7 @@ export default function Actions({ onSaveEntry }) {
             <TouchableOpacity onPress={() => setModalVisible(false)}>
               <AntDesign name="close" size={20} color="#fff"></AntDesign>
             </TouchableOpacity>
-            <Text style={styles.modalText}>Entrada de informação</Text>
+            <Text style={styles.modalText}>Adicionar novo registro</Text>
           </View>
           <Form onSave={onSaveEntry} />
         </View>
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     alignContent: "center",
     alignSelf: "center",
     padding: 20,
-    backgroundColor: "#333",
+    backgroundColor: "#222",
   },
 
   modalHeader: {
@@ -140,7 +140,8 @@ const styles = StyleSheet.create({
 
   modalText: {
     color: "#fff",
-    fontSize: 12,
-    marginBottom: 20,
+    fontSize: 16,
+    fontWeight: "bold",
+    marginBottom: 10,
   },
 });
