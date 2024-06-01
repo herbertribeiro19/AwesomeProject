@@ -7,6 +7,7 @@
 - Design intuitivo e com boas práticas de UI e UX
 - Aplicativo desenvolvido para IOS e Android
 - Desenvolvido no MacOS 14.4
+- Design e desenvolvimento feito por mim
 
 >
 
