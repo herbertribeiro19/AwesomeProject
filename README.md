@@ -1,6 +1,4 @@
-# APLICATIVO FINANCEIRO (F Nance)
-
->
+## APLICATIVO FINANCEIRO (F Nance)
 
 - Aplicativo feito em React Native
 - Biblioteca Expo
@@ -9,9 +7,7 @@
 - Desenvolvido no MacOS 14.4
 - Design e desenvolvimento feito por mim
 
->
-
-#### Imagens do projeto
+## Imagens do projeto
 <img width="300" alt="Imagem 1" src="https://github.com/herbertribeiro19/AwesomeProject/assets/84207944/b7a1d1cf-2fb0-4a36-a911-64bc6564b1dc">
 <img width="300" alt="Imagem 2" src="https://github.com/herbertribeiro19/AwesomeProject/assets/84207944/58921e43-741b-44e0-9a13-70cd1c876a5b">
 <img width="300" alt="Imagem 3" src="https://github.com/herbertribeiro19/AwesomeProject/assets/84207944/5cf1eaf4-456e-4ad2-93ee-1e84b8cdc036">
